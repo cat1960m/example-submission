@@ -1,0 +1,4 @@
+npm create vite@latest introdemo -- --template react
+npm install axios
+
+export VITE_SOME_KEY=bb0f1c5937a6e8d054066902d0f3f580 && npm run dev
