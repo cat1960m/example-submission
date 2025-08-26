@@ -1,16 +1,20 @@
 const express = require("express");
-var morgan = require('morgan')
-const cors =require('cors')
+var morgan = require("morgan");
+//const cors =require('cors')
 
 const app = express();
 
-app.use(express.static('dist'))
-app.use(express.json())
-app.use(cors());
+app.use(express.static("dist"));
+app.use(express.json());
+//app.use(cors());
 
-morgan.token('body', function (req) { return  JSON.stringify(req.body)});
-app.use(morgan('tiny'))
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
+morgan.token("body", function (req) {
+  return JSON.stringify(req.body);
+});
+app.use(morgan("tiny"));
+app.use(
+  morgan(":method :url :status :res[content-length] - :response-time ms :body")
+);
 
 let persons = [
   {
@@ -34,8 +38,6 @@ let persons = [
     number: "39-23-6423122",
   },
 ];
-
-
 
 console.log("hi");
 
@@ -82,13 +84,13 @@ app.delete("/api/persons/:id", (request, response) => {
 });
 
 const getNewId = () => {
-  for(;;) {
-    const id = String(Math.floor(Math.random() *1000));
-    if(!persons.find(person => person.id === id)) {
+  for (;;) {
+    const id = String(Math.floor(Math.random() * 1000));
+    if (!persons.find((person) => person.id === id)) {
       return id;
     }
   }
-}
+};
 
 app.post("/api/persons", (request, response) => {
   const body = request.body;
@@ -97,37 +99,42 @@ app.post("/api/persons", (request, response) => {
 
   const name = body.name.toLowerCase();
 
-  if(!body.name) {
-    response.status(400).json({status: 400, errorMessage: `name is empty`});
+  if (!body.name) {
+    response.status(400).json({ status: 400, errorMessage: `name is empty` });
     return;
   }
 
-  if(!body.number) {
-    response.status(400).json({status: 400, errorMessage: `number is empty`});
+  if (!body.number) {
+    response.status(400).json({ status: 400, errorMessage: `number is empty` });
     return;
   }
 
-  if(persons.find(person => person.name.toLowerCase() === name)) {
-    response.status(400).json({status: 400, errorMessage: `Person with name ${body.name} already exists. Name must be unique`});
+  if (persons.find((person) => person.name.toLowerCase() === name)) {
+    response
+      .status(400)
+      .json({
+        status: 400,
+        errorMessage: `Person with name ${body.name} already exists. Name must be unique`,
+      });
     return;
   }
 
   const newPerson = {
     ...body,
     id: getNewId(),
-  }
+  };
 
-  persons =[...persons, newPerson];
+  persons = [...persons, newPerson];
   response.json(newPerson);
-})
+});
 
 const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint !!' })
-}
+  response.status(404).send({ error: "unknown endpoint !!" });
+};
 
-app.use(unknownEndpoint)
+app.use(unknownEndpoint);
 
-console.log(" process.env.PORT",  process.env.PORT)
-const PORT = process.env.PORT || 3001
+console.log(" process.env.PORT", process.env.PORT);
+const PORT = process.env.PORT || 3001;
 app.listen(PORT);
 console.log(`Server running on port ${PORT}`);

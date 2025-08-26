@@ -111,7 +111,7 @@ const App = () => {
       {notification && <div className="notification">{notification}</div>}
       {errorMessage && <div className="error">{errorMessage}</div>}
       <Filter filterName={filterName} setFilterName={setFilterName} />
-      <h3>Add a new</h3>
+      <h3>Add a new person</h3>
       <PersonForm
         handleSubmit={handleSubmit}
         newName={newName}
