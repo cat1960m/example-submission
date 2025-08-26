@@ -107,7 +107,7 @@ const App = () => {
 
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h2>My Phonebook</h2>
       {notification && <div className="notification">{notification}</div>}
       {errorMessage && <div className="error">{errorMessage}</div>}
       <Filter filterName={filterName} setFilterName={setFilterName} />
