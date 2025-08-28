@@ -47,15 +47,26 @@ const App = () => {
     );
 
     if (!foundPerson) {
-      phones.addPerson(newPerson).then((data) => {
-        setPersons([...persons, data]);
-        setNewName("");
-        setNewNumber("");
-        setNotification(`Added ${data.name}`);
-        window.setTimeout(() => {
-          setNotification("");
-        }, 5000);
-      });
+      phones
+        .addPerson(newPerson)
+        .then((data) => {
+          setPersons([...persons, data]);
+          setNewName("");
+          setNewNumber("");
+          setNotification(`Added ${data.name}`);
+          window.setTimeout(() => {
+            setNotification("");
+          }, 5000);
+        })
+        .catch((error) => {
+          console.log("error", error);
+          setErrorMessage(
+            `${error.message}. ${error.response?.data?.error ?? ""}`
+          );
+          window.setTimeout(() => {
+            setErrorMessage("");
+          }, 5000);
+        });
       return;
     }
 
@@ -77,8 +88,18 @@ const App = () => {
         setNewName("");
         setNewNumber("");
       })
-      .catch(() => {
-        setErrorMessage(`The person ${newPerson.name} is already deleted`);
+      .catch((error) => {
+        console.log("put error", error.response?.data?.error?.errors)
+        if (error.response?.data?.error?.errors) {
+          const keys = Object.keys(error.response?.data?.error?.errors);
+          let ss = '';
+          keys.forEach(name => {
+            ss += error.response?.data?.error?.errors[name].message;
+          })
+          setErrorMessage(ss);
+        } else {
+          setErrorMessage(`The person ${newPerson.name} is already deleted`);
+        }
         window.setTimeout(() => {
           setErrorMessage("");
         }, 5000);
@@ -109,7 +130,7 @@ const App = () => {
     <div>
       <h2>My Phonebook</h2>
       {notification && <div className="notification">{notification}</div>}
-      {errorMessage && <div className="error">{errorMessage}</div>}
+      {errorMessage && <div className="error">{errorMessage.toString()}</div>}
       <Filter filterName={filterName} setFilterName={setFilterName} />
       <h3>Add a new person</h3>
       <PersonForm
