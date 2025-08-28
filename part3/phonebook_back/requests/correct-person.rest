@@ -1,0 +1,7 @@
+PUT http://localhost:3001/api/persons/68afb6df636928b6cdf99999
+Content-Type: application/json
+
+{
+    "name": "rrrr_corr",
+    "number": "888_000"
+}
