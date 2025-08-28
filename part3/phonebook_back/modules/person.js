@@ -16,8 +16,32 @@ mongoose
   .catch((error) => console.log("error connecting to MongoDB:", error.message));
 
 const personSchema = new mongoose.Schema({
-  name: String,
-  number: String,
+  name: {
+    type: String,
+    minLength: 3,
+    required: true,
+  },
+  number: {
+    type: String,
+    minLength: 8,
+    required: true,
+    validate: {
+      validator: (value) => {
+        const parts = value.split("-");
+
+        if (parts.length !== 2 
+            || ![2,3].includes(parts[0].length)
+            || /^\d+$/.test(parts[0]) === false
+            || /^\d+$/.test(parts[1]) === false
+        ) {
+            return false;
+        }
+
+        return true;
+      },
+      message: (props) => `${props.value} is incorrect number format`,
+    },
+  },
 });
 
 personSchema.set("toJSON", {

@@ -18,13 +18,21 @@ app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms :body")
 );
 
+app.get("/info", (request, response) => {
+  Person.find({}).then((persons) => {
+    const first = `Persons has info for ${persons?.length ?? 0} peoples`;
+    const second = new Date();
+    response.send(`<div><p>${first}</p> <p>${second}</p></div>`);
+  });
+});
+
 app.get("/api/persons", (request, response) => {
   Person.find({}).then((result) => {
     response.json(result);
   });
 });
 
-app.post("/api/persons", (request, response) => {
+app.post("/api/persons", (request, response, next) => {
   const body = request.body;
 
   if (!body) {
@@ -38,7 +46,7 @@ app.post("/api/persons", (request, response) => {
 
   newPerson.save().then((result) => {
     response.json(result);
-  });
+  }).catch(error => next(error));
 });
 
 app.get("/api/persons/:id", (request, response, next) => {
@@ -85,12 +93,22 @@ app.put("/api/persons/:id", (request, response, next) => {
 
       result.name = name;
       result.number = number;
+      const error = result.validateSync();
+
+      if(error) {
+        console.log("put error ----------", error, "++++++++++++++++")
+        return response.status(400).json({error});
+      }
+
       result.save().then((correctedPerson) => {
         console.log("correctedPerson", correctedPerson);
         response.json(correctedPerson);
       });
     })
-    .catch((error) => next(error));
+    .catch((error) => {
+      console.log("catch error");
+      return next(error);
+    });
 });
 
 const unknownEndpoint = (request, response) => {
@@ -102,9 +120,14 @@ app.use(unknownEndpoint);
 
 const errorHandler = (error, request, response, next) => {
   if (error.name === "CastError") {
-    console.log("error", error);
+    // console.log("error CastError", error.name, error.message);
     response.status(400).json({ error: "malformatted id" });
     return;
+  }
+
+  if (error.name === "ValidationError") {
+    console.log("error ValidationError", error.name, error.message);
+    return response.status(400).json({ error: error.message });
   }
 
   next(error);

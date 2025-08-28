@@ -1,7 +1,7 @@
-PUT http://localhost:3001/api/persons/68afb6df636928b6cdf99999
+PUT http://localhost:3001/api/persons/68afbd361bcf0cdb35d46375
 Content-Type: application/json
 
 {
-    "name": "rrrr_corr",
+    "name": "nn",
     "number": "888_000"
 }
