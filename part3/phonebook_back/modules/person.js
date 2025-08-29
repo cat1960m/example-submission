@@ -12,7 +12,7 @@ console.log("url", url);
 
 mongoose
   .connect(url)
-  .then((result) => console.log("Connent to MongoDB"))
+  .then(() => console.log("Connent to MongoDB"))
   .catch((error) => console.log("error connecting to MongoDB:", error.message));
 
 const personSchema = new mongoose.Schema({
@@ -29,12 +29,13 @@ const personSchema = new mongoose.Schema({
       validator: (value) => {
         const parts = value.split("-");
 
-        if (parts.length !== 2 
-            || ![2,3].includes(parts[0].length)
-            || /^\d+$/.test(parts[0]) === false
-            || /^\d+$/.test(parts[1]) === false
+        if (
+          parts.length !== 2 ||
+          ![2, 3].includes(parts[0].length) ||
+          /^\d+$/.test(parts[0]) === false ||
+          /^\d+$/.test(parts[1]) === false
         ) {
-            return false;
+          return false;
         }
 
         return true;

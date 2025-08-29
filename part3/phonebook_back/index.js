@@ -44,9 +44,12 @@ app.post("/api/persons", (request, response, next) => {
     number: body.number,
   });
 
-  newPerson.save().then((result) => {
-    response.json(result);
-  }).catch(error => next(error));
+  newPerson
+    .save()
+    .then((result) => {
+      response.json(result);
+    })
+    .catch((error) => next(error));
 });
 
 app.get("/api/persons/:id", (request, response, next) => {
@@ -95,9 +98,9 @@ app.put("/api/persons/:id", (request, response, next) => {
       result.number = number;
       const error = result.validateSync();
 
-      if(error) {
-        console.log("put error ----------", error, "++++++++++++++++")
-        return response.status(400).json({error});
+      if (error) {
+        console.log("put error ----------", error, "++++++++++++++++");
+        return response.status(400).json({ error });
       }
 
       result.save().then((correctedPerson) => {

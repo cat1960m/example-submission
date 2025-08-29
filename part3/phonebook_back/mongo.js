@@ -31,8 +31,8 @@ person.save().then((result) => {
   console.log(`Added ${result.name} number ${result.number} to phonebook`);
 
   Person.find({}).then((result) => {
-    console.log("phonebook:")
-    result.forEach(({name, number}) => {
+    console.log("phonebook:");
+    result.forEach(({ name, number }) => {
       console.log(`${name} ${number}`);
     });
     mongoose.connection.close();
