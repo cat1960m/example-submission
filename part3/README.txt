@@ -1,10 +1,15 @@
-1)install  REST client plugin 
-2)create in rood directory "requests"
-3) add in it files with ".rest" extension
+0) Create back project:
+  >npm init
+  >npm install express
+  >npm install mongoose
+  >npm install dotenv
 
-4) npm install dotenv
-
-
-5) npm install eslint @eslint/js --save-dev
-6) npx eslint --init
-7) npm install --save-dev @stylistic/eslint-plugin-js
+1) Test backend with VisualStudio code
+    add)install  REST client plugin 
+    b)create in rood directory "requests"
+    c) add in it files with ".rest" extension
+   
+3) ESLint:
+    a) npm install eslint @eslint/js --save-dev
+    b) npx eslint --init
+    c) npm install --save-dev @stylistic/eslint-plugin-js
