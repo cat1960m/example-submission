@@ -1,0 +1,11 @@
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ld1VzZXIiLCJpZCI6IjY4Yjk4MzJkNmE3MDEyNDFmYTllMzI2ZCIsImlhdCI6MTc1NzAxMTg4MCwiZXhwIjoxNzU3MDE1NDgwfQ.H7QOmgHwZYqbB5ap2iblJUE2qkcFnbH_ctZ0AdFygAs
+
+{
+    "likes": "45",
+    "title": "jjj22222",
+    "author": "222",
+    "url": "-",
+    "userId": "68b9832d6a701241fa9e326d"
+}
