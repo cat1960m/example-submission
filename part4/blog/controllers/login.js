@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 
 loginRouter.post("/", async (request, response) => {
   const { userName, password } = request.body;
+  console.log("!!!!!!");
   const user = await User.findOne({ userName });
   const isPasswordCorrect = user
     ? await bcrypt.compare(password, user.passwordHash)
@@ -23,7 +24,11 @@ loginRouter.post("/", async (request, response) => {
     expiresIn: 60 * 60,
   });
 
-  response.status(200).send({ userName, name: user.name, token });
+  console.log("---------user", user);
+
+  response
+    .status(200)
+    .send({ userName, name: user.name, token, userId: user._id.toString() });
 });
 
 module.exports = loginRouter;

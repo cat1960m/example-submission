@@ -1,0 +1,22 @@
+
+.message {
+  padding: 5px;
+  margin: 5px;
+  border: 2px solid green;
+  color: green;
+  background-color: lightgray;
+}
+
+.error {
+  padding: 5px;
+  margin: 5px;
+  border: 2px solid red;
+  color: rgb(255, 0,0);
+  background-color: lightgray;
+}
+
+.blog {
+  border: 1px solid gray;
+  padding: 5px;
+  margin: 5px;
+}
