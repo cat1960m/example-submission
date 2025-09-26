@@ -123,4 +123,18 @@ blogRouter.put("/:id", (request, response, next) => {
     .catch((error) => next(error));
 });
 
+blogRouter.post("/:id/comment", async (request, response) => {
+  const blogId = request.params.id;
+  const body = request.body;
+
+  const newComment = new Comment({
+    content: body.content,
+    blogId: blogId,
+  });
+
+  const newContent = await newComment.save();
+
+  response.status(204).json(newContent);
+});
+
 module.exports = blogRouter;

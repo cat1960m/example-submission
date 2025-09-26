@@ -1,0 +1,10 @@
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjY4YzA5Y2NhZTlkY2MwMmJkOTUyMjUwNCIsImlhdCI6MTc1NzQ1NDQwNSwiZXhwIjoxNzU3NDU4MDA1fQ.pby5bpNhbWDQMuP0V6O51onZpBxiOqF_K-e2TdFskcc
+
+{
+    "likes": "2",
+    "title": "second blog",
+    "author": "user",
+    "url": "-"
+}

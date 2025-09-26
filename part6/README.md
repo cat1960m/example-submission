@@ -12,7 +12,7 @@
 3. coverage 
 > npm test -- --coverage
 
-4. react-redux
+4. react-redux (no need to install redux before)
 >npm install react-redux
 > npm install @reduxjs/toolkit
 

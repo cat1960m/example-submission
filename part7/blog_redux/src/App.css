@@ -1,0 +1,32 @@
+
+.message {
+  padding: 5px;
+  margin: 5px;
+  border: 2px solid green;
+  color: green;
+  background-color: lightgray;
+}
+
+.error {
+  padding: 5px;
+  margin: 5px;
+  border: 2px solid red;
+  color: rgb(255, 0,0);
+  background-color: lightgray;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.blog {
+  padding: 5px;
+  margin: 5px;
+}
+
+.del {
+  padding: 5px;
+ /*  height: 100%; */
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
