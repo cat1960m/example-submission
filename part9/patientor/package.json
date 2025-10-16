@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "workspaces": [
+    "patientor_front",
+    "patientor_back",
+    "shared"
+  ],
+  "dependencies": {
+    "zod": "^4.1.12"
+  }
+}
